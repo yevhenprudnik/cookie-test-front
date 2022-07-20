@@ -1,0 +1,31 @@
+.cont {
+	padding-top: 2vw;
+	margin-top: 5%;
+}
+.text-space {
+	letter-spacing: 3px;
+}
+.txts {
+	font-style: normal;
+}
+.my-swal {
+	background: rgba(255,255,255,0);
+	backdrop-filter: blur(2px);
+}
+.input-field {
+	width: 20vw;
+}
+.SignInText{
+    text-align: center;
+    font-size: 4vw;
+    padding-bottom: 1%;
+}
+.center {
+    display: flex;
+    justify-content: center;
+}
+.container {
+	display: flex;
+	justify-content: center;
+	padding: 1.5em;
+}

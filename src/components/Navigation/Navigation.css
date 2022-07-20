@@ -1,0 +1,13 @@
+.navLinks {
+    text-decoration: none;
+}
+.homeLink {
+    display: flex;
+}
+.authDiv {
+    display: flex;
+}
+.nawDiv {
+    display: flex;
+    justify-content: space-between;
+}

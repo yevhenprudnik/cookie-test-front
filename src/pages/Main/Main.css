@@ -1,0 +1,58 @@
+.center {
+    display: flex;
+    justify-content: center;
+}
+.cardComponent {
+	background-color: rgba(255, 255, 255, 0.8);
+	width: 60%;
+    border: solid 1px #96CCFF;
+}
+.grow1 { -moz-osx-font-smoothing: grayscale; -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-transform: translateZ( 0 ); transform: translateZ( 0 ); transition: -webkit-transform .25s ease-out; transition: transform .25s ease-out; transition: transform .25s ease-out, -webkit-transform .25s ease-out; }
+.grow1:hover{ -webkit-transform: scale( 1.05 ); transform: scale( 1.05 ); }
+.grow1-large { -moz-osx-font-smoothing: grayscale; -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-transform: translateZ( 0 ); transform: translateZ( 0 ); transition: -webkit-transform .25s ease-in-out; transition: transform .25s ease-in-out; transition: transform .25s ease-in-out, -webkit-transform .25s ease-in-out; }
+.grow1-large:hover{ -webkit-transform: scale( 1.2 ); transform: scale( 1.2 ); }
+.grow1-large:active { -webkit-transform: scale( .95 ); transform: scale( .95 ); }
+/* Add pointer on hover */
+.pointer:hover { cursor: pointer}
+
+.container1 {
+    display: flex;
+    justify-content: space-between;
+}
+.date {
+    width: 50%;
+    font-size: 1.3vw;
+}
+.username {
+    font-size: 3vw;
+    padding-bottom: 1vw;
+}
+.contentText {
+    font-size: 1.3vw;
+    padding-bottom: 1vw;
+}
+.addButtonDiv {
+    padding: 3%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+.addButton {
+    width: 40%;
+}
+.likeImg{
+    width: 3vw;
+}
+.commentImg{
+    width: 3vw;
+}
+.likes {
+    font-size: 2.5vw;
+}
+.likesDiv {
+    padding-top: 2%;
+}
+.likeCommentDiv {
+    right: 0;
+    /* width: 50%; */
+}
