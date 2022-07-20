@@ -20,7 +20,7 @@ const store = configureStore({
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter basename="/cookie-test-front">
+  <BrowserRouter basename="/">
     <React.StrictMode>
       <Provider store={store}>
         <App />
