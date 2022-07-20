@@ -4,12 +4,14 @@ import {loadUser} from '../../redux/UserSlice'
 import { connect } from 'react-redux'
 import Swal from 'sweetalert2'
 import { api, baseUrl } from '../../api/api'
-
+import Loader from '../../components/Modals/Loader/Loader';
+import LoaderModal from '../../components/Modals/Loader/LoaderModal';
 const Register = ({loadUser}) => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
+    const [loading, setLoading] = useState(false);
     const onSubmitRegister = async () => {
       if (email && password && username) {
         try {
@@ -42,6 +44,10 @@ const Register = ({loadUser}) => {
     }
     return (
         <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
+          {loading && 
+          <LoaderModal>
+            <Loader />
+          </LoaderModal>}
           {redirect && <Navigate replace to='/' />}
             <main className="pa4 black-80">
             <div className="measure">
@@ -80,7 +86,13 @@ const Register = ({loadUser}) => {
                 </fieldset>
                 <div className="center">
                     <input
-                    onClick={() => onSubmitRegister()}
+                    onClick={() => {
+                      onSubmitRegister()
+                      setLoading(true)
+                      setTimeout(() => {
+                        setLoading(false)
+                      }, 1500)
+                    }}
                         className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                         type="submit"
                         value="Register"
