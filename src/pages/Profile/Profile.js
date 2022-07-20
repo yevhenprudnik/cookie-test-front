@@ -10,7 +10,7 @@ const Profile = ({ posts, loadPosts }) => {
   const [ Username, setUsername ] = useState('');
   const [ Email, setEmail ] = useState('');
   const [ ProfileImage, setProfileImage ] = useState('');
-  const userToFind = searchParams.get('userToGet');
+  let userToFind = searchParams.get('userToGet');
   async function getUser(){
     const response = await api.get(`${baseUrl}/getUser?id=${userToFind}`)
     if (response.statusText !== 'OK') {

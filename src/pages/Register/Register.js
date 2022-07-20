@@ -14,20 +14,24 @@ const Register = ({loadUser}) => {
     const [loading, setLoading] = useState(false);
     const onSubmitRegister = async () => {
       if (email && password && username) {
+        setLoading(true)
         try {
           const obj = { email, password, username };
           const {data} = await api.post(`${baseUrl}/register`, obj)
           loadUser(data)
+          setLoading(false)
           setRedirect(true)
         } catch (error) {
           if (error.response !== undefined) {
             const {message} = error.response.data
+            setLoading(false)
               Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: message,
               })
           } else {
+            setLoading(false)
             console.log(error)
           }
         }
@@ -88,10 +92,6 @@ const Register = ({loadUser}) => {
                     <input
                     onClick={() => {
                       onSubmitRegister()
-                      setLoading(true)
-                      setTimeout(() => {
-                        setLoading(false)
-                      }, 1500)
                     }}
                         className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                         type="submit"

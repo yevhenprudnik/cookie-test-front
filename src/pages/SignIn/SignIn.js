@@ -8,27 +8,31 @@ import { api, baseUrl } from '../../api/api'
 import Loader from '../../components/Modals/Loader/Loader';
 import LoaderModal from '../../components/Modals/Loader/LoaderModal';
 
-const SignIn = ({loadUser}) => {
+const SignIn = ({ loadUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
   const [loading, setLoading] = useState(false);
   const onSubmitSignIn = async () => {
     if (email && password) {
+      setLoading(true)
       try {
         const obj = { email, password };
         const {data} = await api.post(`${baseUrl}/signIn`, obj)
         loadUser(data)
+        setLoading(false)
         setRedirect(true)
       } catch (error) {
         if (error.response !== undefined) {
           const {message} = error.response.data
+            setLoading(false)
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
               text: message,
             })
         } else {
+          setLoading(false)
           console.log(error)
         }
       }
@@ -79,10 +83,6 @@ const SignIn = ({loadUser}) => {
                   <input
                       onClick={() => {
                         onSubmitSignIn()
-                        setLoading(true)
-                        setTimeout(() => {
-                          setLoading(false)
-                        }, 1500)
                       }}
                       className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                       type="submit"
