@@ -20,8 +20,10 @@ const SignIn = ({ loadUser }) => {
         const obj = { email, password };
         const {data} = await api.post(`${baseUrl}/signIn`, obj)
         loadUser(data)
-        setLoading(false)
-        setRedirect(true)
+        setTimeout(() =>{
+          setLoading(false)
+          setRedirect(true)
+        }, 1000)
       } catch (error) {
         if (error.response !== undefined) {
           const {message} = error.response.data

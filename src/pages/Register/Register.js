@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import { api, baseUrl } from '../../api/api'
 import Loader from '../../components/Modals/Loader/Loader';
 import LoaderModal from '../../components/Modals/Loader/LoaderModal';
-const Register = ({loadUser}) => {
+const Register = ({ loadUser }) => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -19,8 +19,10 @@ const Register = ({loadUser}) => {
           const obj = { email, password, username };
           const {data} = await api.post(`${baseUrl}/register`, obj)
           loadUser(data)
-          setLoading(false)
-          setRedirect(true)
+          setTimeout(() =>{
+            setLoading(false)
+            setRedirect(true)
+          }, 1000)
         } catch (error) {
           if (error.response !== undefined) {
             const {message} = error.response.data
