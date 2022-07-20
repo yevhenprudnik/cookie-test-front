@@ -5,14 +5,14 @@ import { getPosts } from '../../redux/PostsSlice'
 import { createCards } from '../Main/Main'
 import { api, baseUrl } from '../../api/api'
 
-const Profile = ({ posts, userToFind, loadPosts }) => {
+const Profile = ({ posts, loadPosts }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [ Username, setUsername ] = useState('');
   const [ Email, setEmail ] = useState('');
   const [ ProfileImage, setProfileImage ] = useState('');
-
+  const userToFind = searchParams.get('userToGet');
   async function getUser(){
-    const response = await api.get(`${baseUrl}/getUser?id=${searchParams.get('userToGet')}`)
+    const response = await api.get(`${baseUrl}/getUser?id=${userToFind}`)
     if (response.statusText !== 'OK') {
       throw new Error();
     }
@@ -23,12 +23,11 @@ const Profile = ({ posts, userToFind, loadPosts }) => {
   }
 
   useEffect(() => {
-    //userToFind = '62c58993162fed8d94051995'
     if(!userToFind){
-      userToFind = localStorage.getItem('userToFind')
+      userToFind = localStorage.getItem('userToFind');
     }
     loadPosts(userToFind)
-    getUser(userToFind)
+    getUser()
   }, [])
   return (
     <>
@@ -55,7 +54,6 @@ const Profile = ({ posts, userToFind, loadPosts }) => {
 
 function mapStateToProps(state){
   return {
-    userToFind: state.UserSlice.userToFind,
     posts: state.PostsSlice.posts, 
   }
 }
