@@ -7,8 +7,8 @@ export const api = axios.create({
 const DevUrl = "http://localhost:3001/api"
 const ProductionUrl = "https://cookie-test-server-1903.herokuapp.com/api"
 
-export const baseUrl = process.env.NODE_ENV === "production" ? ProductionUrl : DevUrl
-
+export const baseUrl = process.env.NODE_ENV === 'development' ? DevUrl : ProductionUrl
+console.log(process.env.NODE_ENV)
 api.interceptors.response.use((config) => {
   return config
 }, async (error) =>{
