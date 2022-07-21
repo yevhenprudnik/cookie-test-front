@@ -25,3 +25,7 @@
       color: grey;
       cursor: pointer;
   }
+
+  .cardModal{
+    background-color: var(--card-background-color)
+  }

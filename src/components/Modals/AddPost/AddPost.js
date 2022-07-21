@@ -14,7 +14,7 @@ const AddPost = ({setAddPostOpen, addPost, userId, loadPosts}) => {
           <LoaderModal>
             <Loader />
           </LoaderModal>}
-        <article className='br3 ba b--black-10 mv4 w-100 mw7 shadow-5 center bg-white'>
+        <article className='br3 ba b--black-10 mv4 w-100 mw7 shadow-5 center cardModal'>
           <main className='pa4 black-80 w-80'>
             <label className='mt2 fw6' htmlFor='user-name'>Text:</label>
             <textarea type='text' onChange={(e) => setText(e.target.value)} className='pa2 br2 ba w-100'></textarea>

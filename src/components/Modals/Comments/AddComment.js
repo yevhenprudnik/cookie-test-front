@@ -18,7 +18,7 @@ const AddComment = ({ setCommentModal, comments, addComment, loadPosts, id, user
           </LoaderModal>
         }
         <div className='comment-modal'>
-          <article className='br3 ba b--black-10 w-100 mw7 shadow-5 center bg-white'>
+          <article className='br3 ba b--black-10 w-100 mw7 shadow-5 center cardModal'>
             <main className='pa4 black-80 w-80'>
               {comments.map((comment, i) =>{ return(
                 <div className='commentDiv'key = {i}>
@@ -34,7 +34,7 @@ const AddComment = ({ setCommentModal, comments, addComment, loadPosts, id, user
             </div>
           </article>
           <div className='AcommentDiv'>
-            <article className='br3 ba b--black-10 w-100 mw8 shadow-5 center bg-white'>
+            <article className='br3 ba b--black-10 w-100 mw8 shadow-5 center cardModal'>
               <main className='pa2 black-80 w-80'>
                 <div className='pb2'>
                   <label className='fw6' htmlFor='user-name'>Comment:</label>

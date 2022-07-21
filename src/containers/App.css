@@ -48,3 +48,7 @@ body.dark {
     --slide-menu-background: rgb(50, 50, 50);
     --card-shadow-color: #FF1E56;
 }
+
+label{
+    color: var(--text-color) !important;
+}

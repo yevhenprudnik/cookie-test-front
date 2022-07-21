@@ -9,7 +9,7 @@ const ProfileSettings = ({ setSettingsOpen, username, updNameAndImg, profileImag
   const [newImg, setNewImg] = useState(profileImage)
     return (
         <div className='profile-modal'>
-        <article className='br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center bg-white'>
+        <article className='br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center cardModal'>
           <main className='pa4 black-80 w-80'>
             <img
               src={profileImage}
@@ -18,7 +18,7 @@ const ProfileSettings = ({ setSettingsOpen, username, updNameAndImg, profileImag
             <h1>{newName}</h1>
             <p>{`Member since: ${memberSince}`}</p>
             <label className='mt2 fw6' htmlFor='user-name'>Name:</label>
-            <input type='text' name='user-name' maxLength='10' placeholder={username} className='pa2 br2 ba w-100'
+            <input type='text' name='user-name' maxLength='15' minLength='5' placeholder={username} className='pa2 br2 ba w-100'
               onChange={(e) => setNewName(e.target.value)}>
             </input>
             <label className='mt2 fw6' htmlFor='user-name'>Profile Image</label>
@@ -34,8 +34,20 @@ const ProfileSettings = ({ setSettingsOpen, username, updNameAndImg, profileImag
                     title: 'Oops...',
                     text: `Blank name field is unacceptable`,
                   })
+                } else if(newName.length < 5){
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `Name should be at least 5 characters`,
+                  })
                 } else {
                     updNameAndImg({ userId, newName, newImg })
+                    Swal.fire({
+                      title: newName,
+                      imageUrl: newImg,
+                      imageWidth: 300,
+                      imageHeight: 300,
+                    })
                     setSettingsOpen(false)
                 }
               }}
