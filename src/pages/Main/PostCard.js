@@ -45,7 +45,7 @@ const PostCard =( { text, postUsername, date, likedBy, userId, id, handleLike, a
         selectUserToFind(postUserId)
         }}>
         {/* onClick={() => console.log(username)} */}
-        <div className="dib br3 pa3 ma3 grow1 shadow-5 cardComponent">
+        <div className="dib br3 pa3 ma3 grow1 cardComponent">
             <Link className="username link userNameStyle" 
             to={`/userProfile?userToGet=${localStorage.getItem('userToFind')}`}>
               @{postUsername}

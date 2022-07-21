@@ -33,6 +33,7 @@ body.light {
     --modal-background-color: rgba(255, 255, 255, 0.8);
     --add-post-icon: url(../pages/Main/images/addButton.png);
     --slide-menu-background: #F9F7F7;
+    --card-shadow-color: #96CCFF;
 }
 
 body.dark {
@@ -45,4 +46,5 @@ body.dark {
     --modal-background-color: #46464692;
     --add-post-icon: url(../pages/Main/images/add-4.png);
     --slide-menu-background: rgb(50, 50, 50);
+    --card-shadow-color: #FF1E56;
 }
