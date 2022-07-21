@@ -7,13 +7,13 @@ const Navigation = ( props ) => {
     const { authorized, handleSignOut, username } = props;
     return (
         <>
-            <nav className="bb tc mw7 center nawDiv">
+            <nav className="bb navLinks tc mw7 center nawDiv">
                 <div className="homeLink">
-                    <Link className="f6 f5-l bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l navLinks" to="/">Home</Link>
+                    <Link className="f6 f5-l bg-animate hover-bg-lightest-blue dib pa3 ph4-l navLinks" to="/">Home</Link>
                 </div>
                 { authorized && 
                 <>
-                    <div className="f6 f5-l bg-animate black-80 hover-bg-light-yellow dib pa3 ph4-l navLinks">
+                    <div className="f6 f5-l bg-animate hover-bg-light-yellow dib pa3 ph4-l navLinks">
                         @{username}
                     </div>
                 </>
@@ -21,11 +21,11 @@ const Navigation = ( props ) => {
                 <div className="authDiv">
                     {
                         authorized ?
-                        <Link to="/" onClick={() => handleSignOut()} className="f6 f5-l bg-animate black-80 hover-bg-light-pink dib pa3 ph4-l navLinks pointer">Sign Out</Link>
+                        <Link to="/" onClick={() => handleSignOut()} className="f6 f5-l bg-animate hover-bg-light-pink dib pa3 ph4-l navLinks pointer">Sign Out</Link>
                         :
                         <>
-                            <Link className="f6 f5-l bg-animate black-80 hover-bg-light-green dib pa3 ph4-l navLinks" to="/signIn">Sign In</Link>
-                            <Link className="f6 f5-l bg-animate black-80 hover-bg-light-pink dib pa3 ph4-l navLinks" to="/register">Register</Link>
+                            <Link className="f6 f5-l bg-animate hover-bg-light-green dib pa3 ph4-l navLinks" to="/signIn">Sign In</Link>
+                            <Link className="f6 f5-l bg-animate hover-bg-light-pink dib pa3 ph4-l navLinks" to="/register">Register</Link>
                         </>
                     }
                 </div>

@@ -1,5 +1,6 @@
 .navLinks {
     text-decoration: none;
+    color: var(--button-color);
 }
 .homeLink {
     display: flex;

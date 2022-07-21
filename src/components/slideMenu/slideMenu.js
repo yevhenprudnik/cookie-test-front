@@ -8,6 +8,19 @@ import SettingsModal from '../Modals/ProfileSettings/SettingsModal'
 import ProfileSettings from '../Modals/ProfileSettings/ProfileSettings'
 const SlideMenu = ({ userId, selectUserToFind }) => {
     const [settingsOpen, setSettingsOpen] = useState(false)
+    const [myForceRender, setMyForceRender] = useState(0)
+    const body = document.body;
+    const handleTheme = (e) => {
+      console.log(e)
+      if (e) {
+        localStorage.setItem('theme', 'dark');
+        body.classList.replace('light', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+        body.classList.replace('dark', 'light');
+      }
+    }
+
     return (
       <>
         { settingsOpen && 
@@ -17,15 +30,24 @@ const SlideMenu = ({ userId, selectUserToFind }) => {
         <Menu right width={ '200px' } noOverlay >
           <div className="pv2">
             <Link onMouseEnter={() => selectUserToFind(userId)}
-            className="f6 link dim ba ph3 pv2 mb2 dib purple grow tc w-100" 
-            to={`/userProfile?userToGet=${localStorage.getItem('userToFind')}`}>My Profile</Link>
+            className="navLinks f6 link dim ba ph3 pv2 mb2 dib grow tc w-100 br2" 
+            to={`/userProfile?userToGet=${userId}`}>My Profile</Link>
           </div>
           <div className="pv2">
-            <Link className="f6 link dim ba ph3 pv2 mb2 dib purple grow tc w-100" to="/friends">Friends</Link>
+            <Link className="navLinks f6 link dim ba ph3 pv2 mb2 dib grow tc w-100 br2" to="/friends">Friends</Link>
           </div>
           <div className="pv2">
-            <button onClick={() => {setSettingsOpen(!settingsOpen)}} className="f6 link dim ba ph3 pv2 mb2 dib purple grow tc w-100">Settings</button>
+            <div onClick={() => {setSettingsOpen(!settingsOpen)}} className="navLinks f6 link dim ba ph3 br2 pv2 mb2 dib grow tc w-100 pointer">Settings</div>
           </div>
+          <div className="themeButton">
+              <label className="switch btn-color-mode-switch">
+                    <input type="checkbox" name="color_mode" id="color_mode" 
+                    defaultChecked={localStorage.getItem('theme') === 'dark'} 
+                    onClick={(e) => handleTheme(e.target.checked)}/>
+                    <label htmlFor="color_mode" data-on="Dark" data-off="Light" className="btn-color-mode-switch-inner"></label>
+              </label>
+          </div>
+            {/* onClick={() => {body.classList.add('dark')}}  */}
         </Menu>
         <Outlet />
       </>

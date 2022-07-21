@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import PostCard from './PostCard';
 import addButton from './images/addButton.png'
+import addButtonDark from './images/add-4.png'
 import { getPosts } from '../../redux/PostsSlice';
 import { connect } from 'react-redux'
 import  AddPost  from '../../components/Modals/AddPost/AddPost'
@@ -10,8 +11,9 @@ import  PostModal  from '../../components/Modals/AddPost/AddPostModal'
 const Main = ( props ) => {
     const { posts, authorized, loadPosts } = props
     const [addPostOpen, setAddPostOpen] = useState(false)
+    const [ addImg, setAddImg] = useState(localStorage.getItem('theme') === 'light' ? addButton : addButtonDark)
     useEffect(() => {
-      loadPosts()
+      loadPosts();
     }, [])
     return (
     <div>
@@ -20,21 +22,14 @@ const Main = ( props ) => {
         <PostModal>
           <AddPost addPostOpen={addPostOpen} setAddPostOpen={setAddPostOpen}/>
         </PostModal>
-          <div className="addButtonDiv center">
-              <img 
-              className='grow addButton' 
-              alt='addButton' 
-              src={addButton}/>
-          </div> 
+          <div className="addButtonDiv grow"
+            onClick={()=>{setAddPostOpen(true)}}>
+          </div>
           </>
           :
           authorized && 
-          <div className="addButtonDiv center">
-              <img 
-              className='grow addButton' 
-              alt='addButton' 
-              onClick={()=>{setAddPostOpen(true)}} 
-              src={addButton}/>
+          <div className="addButtonDiv grow"
+            onClick={()=>{setAddPostOpen(true)}}>
           </div> 
           }
         {createCards(posts)}

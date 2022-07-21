@@ -1,3 +1,4 @@
+import './App.css'
 import  { React, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom' 
 import { connect } from 'react-redux'
@@ -11,6 +12,15 @@ import Friends from '../components/Friends/Friends'
 import { getAuth } from '../redux/UserSlice'
 
 function App({ authorized, checkAuth }) {
+  const body = document.body
+
+  if (localStorage.getItem('theme')) {
+    body.classList.add(localStorage.getItem('theme'))
+  } else {
+    localStorage.setItem('theme', 'light')
+    body.classList.add('light')
+  }
+
   useEffect(() => {
     localStorage.getItem("accessToken") && checkAuth()
   })
