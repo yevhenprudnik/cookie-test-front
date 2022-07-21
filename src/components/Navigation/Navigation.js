@@ -1,10 +1,11 @@
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom';
 import './Navigation.css';
 import { signOut } from '../../redux/UserSlice';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { selectUserToFind } from '../../redux/UserSlice';
 
 const Navigation = ( props ) => {
-    const { authorized, handleSignOut, username } = props;
+    const { authorized, handleSignOut, username, userId } = props;
     return (
         <>
             <nav className="bb navLinks tc mw7 center nawDiv">
@@ -13,8 +14,11 @@ const Navigation = ( props ) => {
                 </div>
                 { authorized && 
                 <>
-                    <div className="f6 f5-l bg-animate hover-bg-light-yellow dib pa3 ph4-l navLinks">
-                        @{username}
+                    <div >
+                    <Link onMouseEnter={() => selectUserToFind(userId)}
+                        className="f6 f5-l bg-animate hover-bg-light-yellow dib pa3 ph4-l navLinks"
+                        to={`/userProfile?userToGet=${userId}`}>@{username}
+                    </Link>
                     </div>
                 </>
                 }
@@ -38,12 +42,14 @@ const Navigation = ( props ) => {
 const mapStateToProps = (state) => {
   return {
     authorized: state.UserSlice.authorized, 
-    username: state.UserSlice.username
+    username: state.UserSlice.username,
+    userId: state.UserSlice.userId
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return { 
     handleSignOut: () => dispatch(signOut()),
+    selectUserToFind : (userId) => dispatch(selectUserToFind(userId))
   }
 }
 
