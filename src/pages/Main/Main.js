@@ -1,7 +1,5 @@
 import { React, useState, useEffect } from 'react';
 import PostCard from './PostCard';
-import addButton from './images/addButton.png'
-import addButtonDark from './images/add-4.png'
 import { getPosts } from '../../redux/PostsSlice';
 import { connect } from 'react-redux'
 import  AddPost  from '../../components/Modals/AddPost/AddPost'
@@ -11,7 +9,6 @@ import  PostModal  from '../../components/Modals/AddPost/AddPostModal'
 const Main = ( props ) => {
     const { posts, authorized, loadPosts } = props
     const [addPostOpen, setAddPostOpen] = useState(false)
-    const [ addImg, setAddImg] = useState(localStorage.getItem('theme') === 'light' ? addButton : addButtonDark)
     useEffect(() => {
       loadPosts();
     }, [])
@@ -48,6 +45,7 @@ export function createCards (arr) {
         date = {post.postedAt}
         likedBy = {post.likedBy}
         comments = {post.comments}
+        postUserImg = {post.postedBy.profileImage}
       />
     )})
   return(Cards)

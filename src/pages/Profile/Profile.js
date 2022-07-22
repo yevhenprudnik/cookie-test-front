@@ -34,7 +34,7 @@ const Profile = ({ posts, loadPosts }) => {
       <article className="mw8 center cardComponent br3 pa3 pa4-ns mv3">
         <div className="tc">
           <div className="">
-            <img src={ ProfileImage } className="br-100 h5 w5 dib grow" title="Photo of a kitty staring at you"/>
+            <img src={ ProfileImage } className="br-100 h5 w5 dib grow highlight" title="Photo of a kitty staring at you"/>
           </div>
           <h1 className="f4">{ Username }</h1>
           <h2 className="f6">{ Email }</h2>

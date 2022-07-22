@@ -13,7 +13,7 @@ const ProfileSettings = ({ setSettingsOpen, username, updNameAndImg, profileImag
           <main className='pa4 black-80 w-80'>
             <img
               src={profileImage}
-              className='h3 w3 dib br-100' alt='Profile Image'
+              className='h3 w3 dib br-100 highlight' alt='Profile Image'
             />
             <h1>{newName}</h1>
             <p>{`Member since: ${memberSince}`}</p>

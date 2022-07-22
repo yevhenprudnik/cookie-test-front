@@ -14,7 +14,10 @@ import Loader from '../../components/Modals/Loader/Loader'
 import { Link } from 'react-router-dom'
 
 
-const PostCard =( { text, postUsername, date, likedBy, userId, id, handleLike, authorized, comments, selectUserToFind, postUserId } ) => {
+const PostCard =( { 
+  text, postUsername, date, likedBy, userId, 
+  id, handleLike, authorized, comments, 
+  selectUserToFind, postUserId, postUserImg } ) => {
 
   const [ postId, setId ] = useState(null);
   const [ commentModalOpen, setCommentModal ] = useState(false)
@@ -46,10 +49,15 @@ const PostCard =( { text, postUsername, date, likedBy, userId, id, handleLike, a
         }}>
         {/* onClick={() => console.log(username)} */}
         <div className="dib br3 pa3 ma3 grow1 cardComponent">
-            <Link className="username link userNameStyle" 
+          <div className="">
+            <Link className="username link userNameStyle MyContainer" 
             to={`/userProfile?userToGet=${localStorage.getItem('userToFind')}`}>
+              <div className="PostUserImgDiv">
+                <img src={postUserImg} className="highlight PostUserImg"/>
+              </div>
               @{postUsername}
             </Link>
+          </div>
             <div className="contentText">
               {text}
             </div>

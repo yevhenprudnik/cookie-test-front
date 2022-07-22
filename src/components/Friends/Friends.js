@@ -3,7 +3,7 @@ import React from 'react'
 export default function Friends() {
   return (
     <div className='pa3'>
-      <article className='br3 ba b--black-10 w-100 mw7 shadow-5 center bg-white'>
+      <article className='br3 ba w-100 mw7 center cardComponent '>
             <main className='pa2 black-80 w-80'>
             <div className=''>
               <h2>@Friend</h2>

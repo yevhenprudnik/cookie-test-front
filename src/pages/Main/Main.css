@@ -61,3 +61,15 @@
     right: 0;
     /* width: 50%; */
 }
+.PostUserImg {
+    width: 3vw;
+    border-radius: 100%;
+}
+.MyContainer {
+    display: flex;
+}
+
+.PostUserImgDiv {
+    padding-top: 0.8%;
+    padding-right: 1%;
+}
