@@ -40,13 +40,13 @@ body.dark {
     --background-color: black;
     --text-color: white;
     --card-background-color: rgb(50, 50, 50);
-    --border-color: #FF1E56;
+    --border-color: #9d9d9d;
     --button-color: #FFAC41;
     --user-color: #9d9d9d;
     --modal-background-color: #46464692;
     --add-post-icon: url(../pages/Main/images/add-4.png);
     --slide-menu-background: rgb(50, 50, 50);
-    --card-shadow-color: #FF1E56;
+    --card-shadow-color: #ff0000;
 }
 
 label{

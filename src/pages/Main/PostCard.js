@@ -53,7 +53,7 @@ const PostCard =( {
             <Link className="username link userNameStyle MyContainer" 
             to={`/userProfile?userToGet=${localStorage.getItem('userToFind')}`}>
               <div className="PostUserImgDiv">
-                <img src={postUserImg} className="highlight PostUserImg"/>
+                <img src={postUserImg} className="PostUserImg"/>
               </div>
               @{postUsername}
             </Link>
