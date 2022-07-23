@@ -10,19 +10,20 @@ const initialUser = {
   friends: [], 
   memberSince: '',
   profileImage: '',
-  userToFind: ''
+  userToFind: '',
+  isActivated: false
 }
 
-const DevUser = {
-  userId: 1,
-  authorized: true,
-  username: 'Anthony',
-  email: 'anthony@gmail.com',
-  posts: [],
-  friends: [], 
-  memberSince: new Date().toDateString(),
-  profileImage: 'http://tachyons.io/img/avatar_1.jpg'
-}
+// const DevUser = {
+//   userId: 1,
+//   authorized: true,
+//   username: 'Anthony',
+//   email: 'anthony@gmail.com',
+//   posts: [],
+//   friends: [], 
+//   memberSince: new Date().toDateString(),
+//   profileImage: 'http://tachyons.io/img/avatar_1.jpg'
+// }
 
 export const getAuth = createAsyncThunk(
   'UserSlice/getAuth',
@@ -65,8 +66,7 @@ const UserSlice = createSlice({
       return initialUser
     },
     loadUser(state, action){
-      const {username, email, id, profileImage} = action.payload.user
-      console.log(action.payload.user)
+      const {username, email, id, profileImage, isActivated} = action.payload.user
       const { accessToken, refreshToken} = action.payload
       localStorage.setItem('accessToken',accessToken)
       localStorage.setItem('refreshToken',refreshToken)
@@ -77,6 +77,7 @@ const UserSlice = createSlice({
       state.profileImage = profileImage
       state.authorized = true
       state.userToFind = id
+      state.isActivated = isActivated
     },
     changeUsername(state, action){
       state.username = action.payload
@@ -104,6 +105,7 @@ const UserSlice = createSlice({
       state.profileImage = profileImage
       state.userToFind = id
       state.memberSince = memberSince
+      state.isActivated = isActivated
       localStorage.setItem('userToFind', id)
     },
     [ getAuth.rejected ]: (state, action) => {

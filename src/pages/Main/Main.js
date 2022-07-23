@@ -4,16 +4,22 @@ import { getPosts } from '../../redux/PostsSlice';
 import { connect } from 'react-redux'
 import  AddPost  from '../../components/Modals/AddPost/AddPost'
 import  PostModal  from '../../components/Modals/AddPost/AddPostModal'
-
+import { unActivatedEmail } from '../../helper/handleUnsignedUser'
 
 const Main = ( props ) => {
-    const { posts, authorized, loadPosts } = props
+    const { posts, authorized, loadPosts, isActivated, email } = props
     const [addPostOpen, setAddPostOpen] = useState(false)
     useEffect(() => {
       loadPosts();
     }, [])
     return (
     <div>
+      {!isActivated && authorized && 
+      <div className="pt2 confirmEmailDiv">
+        <div className="tc confirmEmail">
+          We have sent an activation link to {email}. Please confirm your email
+        </div>
+      </div>}
         { authorized && addPostOpen ? 
         <>
         <PostModal>
@@ -26,7 +32,13 @@ const Main = ( props ) => {
           :
           authorized && 
           <div className="addButtonDiv grow"
-            onClick={()=>{setAddPostOpen(true)}}>
+            onClick={()=>{
+              if (isActivated) {
+                setAddPostOpen(true)
+              } else {
+                unActivatedEmail("create a post")
+              }
+            }}>
           </div> 
           }
         {createCards(posts)}
@@ -55,6 +67,8 @@ function mapStateToProps (state){
   return {
     posts: state.PostsSlice.posts, 
     authorized: state.UserSlice.authorized,
+    isActivated: state.UserSlice.isActivated,
+    email: state.UserSlice.email,
   }
 }
 function mapDispatchToProps(dispatch){

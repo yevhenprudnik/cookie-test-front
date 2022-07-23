@@ -37,11 +37,11 @@
     padding-bottom: 1vw;
 }
 .addButtonDiv {
-    padding: 3%;
+    padding: 40px;
     position: fixed;
     background-image: var(--add-post-icon);
     background-repeat: no-repeat;
-    background-size: 5vw;
+    background-size: 70px;
     right: 10px;
     bottom: 10px;
 }
@@ -77,4 +77,11 @@
 }
 .border {
     border: solid 3px var(--border-color);
+}
+
+.confirmEmail {
+    background-color: red;
+}
+.confirmEmailDiv{
+    justify-content: center;
 }
