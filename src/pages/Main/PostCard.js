@@ -1,33 +1,56 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { likePost } from '../../redux/PostsSlice'
+import { likePost, editPost } from '../../redux/PostsSlice'
 import { selectUserToFind } from '../../redux/UserSlice'
 import comment from './images/comment.png'
 import liked from './images/heartLiked.png'
 import like from './images/heart.png'
+import edit from './images/edit.png'
 import handleUnsignedUser from '../../helper/handleUnsignedUser'
 import './Main.css'
 import AddCommentModal from '../../components/Modals/Comments/AddCommentModal'
 import AddComment from '../../components/Modals/Comments/AddComment'
 import LoaderModal from '../../components/Modals/Loader/LoaderModal'
 import Loader from '../../components/Modals/Loader/Loader'
+import EditPost from '../../components/Modals/AddPost/EditPost'
+import  PostModal  from '../../components/Modals/AddPost/AddPostModal'
 import { Link } from 'react-router-dom'
 
 
 const PostCard =( { 
   text, postUsername, date, likedBy, userId, 
   id, handleLike, authorized, comments, 
-  selectUserToFind, postUserId, postUserImg } ) => {
+  selectUserToFind, postUserId, postUserImg, username, newPostText } ) => {
 
   const [ postId, setId ] = useState(null);
+
   const [ commentModalOpen, setCommentModal ] = useState(false)
+
+  const [ editPostModal, setEditPostModal ] = useState(false)
+
   let likeImage; 
   const idUser = likedBy.findIndex(e => e._id === userId)
   idUser !== -1 ? likeImage = liked : likeImage = like
+
   const [myForceRender, setMyForceRender] = useState(0)
+
   const [ likeImg, setLikeImg ] = useState(likeImage)
+
   const [count, setCount] = useState(likedBy.length)
+
+  const [postText, setText] = useState(text)
+
   const [loading, setLoading] = useState(false)
+  
+  const [edited, setEdited] = useState(false)
+
+  useEffect(() => {
+    if (edited) {
+      setText(newPostText)
+      setEdited(false)
+    }
+  },[edited])
+
   return (
     <>
     {
@@ -42,24 +65,38 @@ const PostCard =( {
       <Loader />
     </LoaderModal>
     }
+    {
+    editPostModal &&
+    <PostModal>
+      <EditPost editPostModal={editPostModal} setEditPostOpen={setEditPostModal} postId={postId} setEdited={setEdited}/>
+    </PostModal>
+    }
       <div className='center' onMouseEnter={() => {
         setId(id)
         localStorage.setItem('userToFind', postUserId)
         selectUserToFind(postUserId)
         }}>
-        {/* onClick={() => console.log(username)} */}
         <div className="dib br3 pa3 ma3 grow1 cardComponent">
-          <div className="">
-            <Link className="username link userNameStyle MyContainer" 
+          <div className="container32">
+            <Link className="username link userNameStyle MyContainer w-50" 
             to={`/userProfile?userToGet=${localStorage.getItem('userToFind')}`}>
               <div className="PostUserImgDiv">
                 <img src={postUserImg} className="PostUserImg"/>
               </div>
               @{postUsername}
             </Link>
+            {postUsername === username &&
+            <div className="editDiv">
+              <div className="w-10 pointer grow">
+                <img src={edit} className="" onClick={() => {
+                  setEditPostModal(true)
+                  }}/>
+              </div>
+            </div>
+            }
           </div>
             <div className="contentText">
-              {text}
+              {postText}
             </div>
             <div className="container1">
               <div className="date">
@@ -111,14 +148,16 @@ const PostCard =( {
 const mapDispatchToProps = (dispatch) => {
   return { 
     handleLike: (user) => dispatch(likePost(user)), 
-    selectUserToFind : (userId) => dispatch(selectUserToFind(userId))
+    selectUserToFind : (userId) => dispatch(selectUserToFind(userId)),
+    editPost: (postData) => dispatch(editPost(postData))
   }
 }
 const mapStateToProps = (state) => {
   return {
     username: state.UserSlice.username, 
     authorized: state.UserSlice.authorized,
-    userId: state.UserSlice.userId
+    userId: state.UserSlice.userId,
+    newPostText: state.PostsSlice.newText, 
   }
 }
   export default connect(mapStateToProps, mapDispatchToProps)(PostCard)

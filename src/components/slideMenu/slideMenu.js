@@ -8,7 +8,6 @@ import SettingsModal from '../Modals/ProfileSettings/SettingsModal'
 import ProfileSettings from '../Modals/ProfileSettings/ProfileSettings'
 const SlideMenu = ({ userId, selectUserToFind }) => {
     const [settingsOpen, setSettingsOpen] = useState(false)
-    const [myForceRender, setMyForceRender] = useState(0)
     const body = document.body;
     const handleTheme = (e) => {
       console.log(e)

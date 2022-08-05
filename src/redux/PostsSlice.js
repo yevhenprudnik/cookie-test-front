@@ -63,6 +63,21 @@ export const addComment = createAsyncThunk(
   }
 )
 
+export const editPost = createAsyncThunk(
+  'PostsSlice/editPost',
+  async function(postData, {rejectWithValue}){
+    try {
+      const response = await api.post(`${baseUrl}/editPost`, postData)
+      if (response.statusText !== 'OK') {
+        throw new Error();
+      }
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
 const PostsSlice = createSlice({
   name: 'PostsSlice',
   initialState: {
@@ -70,6 +85,7 @@ const PostsSlice = createSlice({
     recommendedPosts: [],
     status: null,
     error: null, 
+    newText: '',
     arr : []
   }, 
   extraReducers: {
@@ -123,6 +139,20 @@ const PostsSlice = createSlice({
       state.error = null
     },
     [ addComment.rejected ]: (state, action) => {
+      state.status = 'rejected'
+      state.error = action.payload
+    },
+    //----------------------- EDIT POST -----------------------------//
+    [editPost.pending]: (state) => {
+      state.status = 'pending'
+      state.error = null
+    },
+    [ editPost.fulfilled ]: (state, action) => {
+      state.status = 'fulfilled'
+      state.newText = action.payload.text
+      state.error = null
+    },
+    [ editPost.rejected ]: (state, action) => {
       state.status = 'rejected'
       state.error = action.payload
     }
