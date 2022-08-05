@@ -27,7 +27,7 @@ const EditPost = ({ setEditPostOpen, editPost, postId, setEdited }) => {
                   setLoading(false)
                   setEditPostOpen(false)
                   setEdited(true)
-                },500)
+                },1500)
               }}
               >
                 Edit
