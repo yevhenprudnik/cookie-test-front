@@ -5,9 +5,11 @@ import { connect } from 'react-redux'
 import  AddPost  from '../../components/Modals/AddPost/AddPost'
 import  PostModal  from '../../components/Modals/AddPost/AddPostModal'
 import { unActivatedEmail } from '../../helper/handleUnsignedUser'
+import liked from './images/heartLiked.png'
+import like from './images/heart.png'
 
 const Main = ( props ) => {
-    const { posts, authorized, loadPosts, isActivated, email } = props
+    const { posts, authorized, loadPosts, isActivated, email, userId } = props
     const [addPostOpen, setAddPostOpen] = useState(false)
     useEffect(() => {
       loadPosts();
@@ -41,12 +43,12 @@ const Main = ( props ) => {
             }}>
           </div> 
           }
-        {createCards(posts)}
+        {createCards(posts, userId)}
     </div>
     );
 }
 
-export function createCards (arr) {
+export function createCards (arr, userId) {
     const Cards = arr.map((post, i) => { return (
       <PostCard 
         key = {post._id}
@@ -58,6 +60,7 @@ export function createCards (arr) {
         likedBy = {post.likedBy}
         comments = {post.comments}
         postUserImg = {post.postedBy.profileImage}
+        likeImgProp = {post.likedBy.findIndex(e => e._id === userId) === -1 ? like : liked} 
       />
     )})
   return(Cards)
@@ -69,6 +72,7 @@ function mapStateToProps (state){
     authorized: state.UserSlice.authorized,
     isActivated: state.UserSlice.isActivated,
     email: state.UserSlice.email,
+    userId: state.UserSlice.userId,
   }
 }
 function mapDispatchToProps(dispatch){

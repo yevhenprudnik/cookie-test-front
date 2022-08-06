@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom'
 const PostCard =( { 
   text, postUsername, date, likedBy, userId, 
   id, handleLike, authorized, comments, 
-  selectUserToFind, postUserId, postUserImg, username, newPostText } ) => {
+  selectUserToFind, postUserId, postUserImg, username, newPostText, likeImgProp} ) => {
 
   const [ postId, setId ] = useState(null);
 
@@ -28,13 +28,9 @@ const PostCard =( {
 
   const [ editPostModal, setEditPostModal ] = useState(false)
 
-  let likeImage; 
-  const idUser = likedBy.findIndex(e => e._id === userId)
-  idUser !== -1 ? likeImage = liked : likeImage = like
-
   const [myForceRender, setMyForceRender] = useState(0)
 
-  const [ likeImg, setLikeImg ] = useState(likeImage)
+  const [ likeImg, setLikeImg ] = useState(likeImgProp)
 
   const [count, setCount] = useState(likedBy.length)
 
@@ -50,7 +46,6 @@ const PostCard =( {
       setEdited(false)
     }
   },[edited])
-
   return (
     <>
     {

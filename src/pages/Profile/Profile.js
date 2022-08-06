@@ -5,7 +5,7 @@ import { getPosts } from '../../redux/PostsSlice'
 import { createCards } from '../Main/Main'
 import { api, baseUrl } from '../../api/api'
 
-const Profile = ({ posts, loadPosts }) => {
+const Profile = ({ posts, loadPosts, userId }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [ Username, setUsername ] = useState('');
   const [ Email, setEmail ] = useState('');
@@ -46,7 +46,7 @@ const Profile = ({ posts, loadPosts }) => {
         Posts:
       </div>
       <div>
-        {createCards(posts)}
+        {createCards(posts, userId)}
       </div>
     </>
   )
@@ -55,6 +55,7 @@ const Profile = ({ posts, loadPosts }) => {
 function mapStateToProps(state){
   return {
     posts: state.PostsSlice.posts, 
+    userId: state.UserSlice.userId,
   }
 }
 function mapDispatchToProps(dispatch){
