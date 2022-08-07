@@ -9,9 +9,6 @@ const Navigation = ( props ) => {
     return (
         <>
             <nav className="bb navLinks tc mw7 center nawDiv">
-                <div className="homeLink">
-                    <Link className="f6 f5-l bg-animate hover-bg-lightest-blue dib pa3 ph4-l navLinks" to="/">Home</Link>
-                </div>
                 { authorized && 
                 <>
                     <div >
@@ -22,17 +19,19 @@ const Navigation = ( props ) => {
                     </div>
                 </>
                 }
-                <div className="authDiv">
-                    {
-                        authorized ?
-                        <Link to="/" onClick={() => handleSignOut()} className="f6 f5-l bg-animate hover-bg-light-pink dib pa3 ph4-l navLinks pointer">Sign Out</Link>
-                        :
-                        <>
-                            <Link className="f6 f5-l bg-animate hover-bg-light-green dib pa3 ph4-l navLinks" to="/signIn">Sign In</Link>
-                            <Link className="f6 f5-l bg-animate hover-bg-light-pink dib pa3 ph4-l navLinks" to="/register">Register</Link>
-                        </>
-                    }
-                </div>
+                <Link className="f6 f5-l bg-animate hover-bg-lightest-blue dib pa3 ph4-l navLinks" to="/">Home</Link>
+                {
+                    authorized && <Link className="f6 f5-l bg-animate hover-bg-washed-red dib pa3 ph4-l navLinks" to="/following">Following</Link>
+                }
+                {
+                    authorized ?
+                    <Link to="/" onClick={() => handleSignOut()} className="f6 f5-l bg-animate hover-bg-light-blue dib pa3 ph4-l navLinks pointer">Sign Out</Link>
+                    :
+                    <>
+                        <Link className="f6 f5-l bg-animate hover-bg-light-green dib pa3 ph4-l navLinks" to="/signIn">Sign In</Link>
+                        <Link className="f6 f5-l bg-animate hover-bg-light-blue dib pa3 ph4-l navLinks" to="/register">Register</Link>
+                    </>
+                }
             </nav>
             <Outlet/>
         </>

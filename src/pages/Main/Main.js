@@ -8,8 +8,7 @@ import { unActivatedEmail } from '../../helper/handleUnsignedUser'
 import liked from './images/heartLiked.png'
 import like from './images/heart.png'
 
-const Main = ( props ) => {
-    const { posts, authorized, loadPosts, isActivated, email, userId } = props
+const Main = ( { posts, authorized, loadPosts, isActivated, email, userId, following } ) => {
     const [addPostOpen, setAddPostOpen] = useState(false)
     useEffect(() => {
       loadPosts();
@@ -73,6 +72,7 @@ function mapStateToProps (state){
     isActivated: state.UserSlice.isActivated,
     email: state.UserSlice.email,
     userId: state.UserSlice.userId,
+    following: state.UserSlice.following,
   }
 }
 function mapDispatchToProps(dispatch){

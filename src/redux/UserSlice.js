@@ -7,7 +7,8 @@ const initialUser = {
   username: '',
   email: '',
   posts: [],
-  friends: [], 
+  followers: [],
+  following: [],
   memberSince: '',
   profileImage: '',
   userToFind: '',
@@ -41,10 +42,41 @@ export const getAuth = createAsyncThunk(
 )
 
 export const updNameAndImg = createAsyncThunk(
-  'PostsSlice/updNameAndImg',
+  'UserSlice/updNameAndImg',
   async function(updateData, {rejectWithValue}){
     try {
       const response = await api.post(`${baseUrl}/updNameAndImg`, updateData)
+      if (response.statusText !== 'OK') {
+        throw new Error();
+      }
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
+export const follow  = createAsyncThunk(
+  'UserSlice/follow',
+  async function(userToFollow, {rejectWithValue}){
+    try {
+      const response = await api.post(`${baseUrl}/follow`, userToFollow)
+      if (response.statusText !== 'OK') {
+        throw new Error();
+      }
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
+export const unfollow  = createAsyncThunk(
+  'UserSlice/follow',
+  async function(userToUnfollow, {rejectWithValue}){
+    try {
+      const response = await api.post(`${baseUrl}/unfollow`, userToUnfollow)
       if (response.statusText !== 'OK') {
         throw new Error();
       }
@@ -90,28 +122,36 @@ const UserSlice = createSlice({
     }
   },
   extraReducers: {
+    // -------------------------------- Auth --------------------------- //
     [getAuth.pending]: (state) => {
       state.status = 'pending'
       state.error = null
     },
     [ getAuth.fulfilled ]: (state, action) => {
-      const { username, email, id, isActivated, profileImage, memberSince } = action.payload
+      const {
+        username, email, _id, isActivated, 
+        profileImage, memberSince, followers, 
+        following 
+        } = action.payload
       state.status = 'fulfilled'
       state.error = null
       state.username = username
       state.email = email
-      state.userId = id
+      state.userId = _id
       state.authorized = true
       state.profileImage = profileImage
-      state.userToFind = id
+      state.userToFind = _id
       state.memberSince = memberSince
       state.isActivated = isActivated
-      localStorage.setItem('userToFind', id)
+      state.followers = followers
+      state.following = following
+      localStorage.setItem('userToFind', _id)
     },
     [ getAuth.rejected ]: (state, action) => {
       state.status = 'rejected'
       state.error = action.payload
     },
+    // -------------------- Change username and Img ------------------ //
     [updNameAndImg.pending]: (state) => {
       state.status = 'pending'
       state.error = null
@@ -127,6 +167,37 @@ const UserSlice = createSlice({
       state.profileImage = profileImage
     },
     [ updNameAndImg.rejected ]: (state, action) => {
+      state.status = 'rejected'
+      state.error = action.payload
+    },
+    // -------------------------------- Follow / Unfollow ------------------------------- //
+    [follow.pending]: (state) => {
+      state.status = 'pending'
+      state.error = null
+    },
+    [ follow.fulfilled ]: (state, action) => {
+      const { followers, following } = action.payload
+      state.status = 'fulfilled'
+      state.error = null
+      state.followers = followers
+      state.following = following
+    },
+    [ follow.rejected ]: (state, action) => {
+      state.status = 'rejected'
+      state.error = action.payload
+    },
+    [unfollow.pending]: (state) => {
+      state.status = 'pending'
+      state.error = null
+    },
+    [ unfollow.fulfilled ]: (state, action) => {
+      const { followers, following } = action.payload
+      state.status = 'fulfilled'
+      state.error = null
+      state.followers = followers
+      state.following = following
+    },
+    [ unfollow.rejected ]: (state, action) => {
       state.status = 'rejected'
       state.error = action.payload
     }

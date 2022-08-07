@@ -19,6 +19,20 @@ export const getPosts = createAsyncThunk(
     }
   }
 )
+export const getFollowingPosts = createAsyncThunk(
+  'PostsSlice/getFollowingPosts',
+  async function(followingIds, {rejectWithValue}){
+    try {
+      const response = await api.post(`${baseUrl}/getFollowingPosts`, followingIds)
+      if (response.statusText !== 'OK') {
+        throw new Error();
+      }
+      return response.data
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
 export const createPost = createAsyncThunk(
   'PostsSlice/createPost',
   async function(postData, {rejectWithValue}){
@@ -155,7 +169,21 @@ const PostsSlice = createSlice({
     [ editPost.rejected ]: (state, action) => {
       state.status = 'rejected'
       state.error = action.payload
-    }
+    },
+    //----------------------- Get Following POSTS -----------------------------//
+    [getFollowingPosts.pending]: (state) => {
+      state.status = 'pending'
+      state.error = null
+    },
+    [ getFollowingPosts.fulfilled ]: (state, action) => {
+      state.status = 'fulfilled'
+      state.error = null
+      state.posts = action.payload
+    },
+    [ getFollowingPosts.rejected ]: (state, action) => {
+      state.status = 'rejected'
+      state.error = action.payload
+    },
   },
 })
 

@@ -3,6 +3,7 @@ import  { React, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom' 
 import { connect } from 'react-redux'
 import Main from '../pages/Main/Main'
+import Following from '../pages/Main/Following'
 import SignIn from '../pages/SignIn/SignIn'
 import Register from '../pages/Register/Register'
 import Navigation from '../components/Navigation/Navigation'
@@ -34,6 +35,7 @@ function App({ authorized, checkAuth }) {
           <Route path="/register" element={ <Register /> }/>
           <Route path="/userProfile" element={ <Profile /> }/>
           <Route path="/friends" element={ <Friends /> }/>
+          <Route path="/following" element={ <Following /> }/>
         </Route>
       </Routes>
     </>

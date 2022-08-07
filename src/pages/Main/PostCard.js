@@ -72,22 +72,18 @@ const PostCard =( {
         selectUserToFind(postUserId)
         }}>
         <div className="dib br3 pa3 ma3 grow1 cardComponent">
-          <div className="container32">
-            <Link className="username link userNameStyle MyContainer w-50" 
-            to={`/userProfile?userToGet=${localStorage.getItem('userToFind')}`}>
-              <div className="PostUserImgDiv">
-                <img src={postUserImg} className="PostUserImg"/>
-              </div>
-              @{postUsername}
-            </Link>
+          <div className="container1">
+              <Link className="username link userNameStyle MyContainer w-50" 
+              to={`/userProfile?userToGet=${localStorage.getItem('userToFind')}`}>
+                <div className="PostUserImgDiv">
+                  <img src={postUserImg} className="PostUserImg"/>
+                </div>
+                @{postUsername}
+              </Link>
             {postUsername === username &&
-            <div className="editDiv">
-              <div className="w-10 pointer grow">
-                <img src={edit} className="" onClick={() => {
+                <img src={edit} className="editImg pointer grow" onClick={() => {
                   setEditPostModal(true)
                   }}/>
-              </div>
-            </div>
             }
           </div>
             <div className="contentText">
@@ -104,7 +100,7 @@ const PostCard =( {
                       <div className="likes">{count}</div>
                     </div>
                       <div className="imgDiv pr1">
-                        <img className="grow likeImg" src={likeImg} alt='like' onClick={() => {
+                        <img className="grow likeImg pointer" src={likeImg} alt='like' onClick={() => {
                             if (authorized) {
                               handleLike({postId, userId})
                               setLoading(true)
@@ -121,7 +117,7 @@ const PostCard =( {
                           }}/>
                       </div>
                   </div>
-                  <div className="comment  pl1" onClick={() => {
+                  <div className="comment pointer pl1" onClick={() => {
                     if (authorized) {
                       setCommentModal(true)
                     }
