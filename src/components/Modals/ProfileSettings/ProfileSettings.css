@@ -1,31 +1,31 @@
 #settings-modal {
-    position: relative;
-    z-index: 999;
+  position: relative;
+  z-index: 999;
 }
 .profile-modal {
-    background-color: var(--modal-background-color);
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .modal-close {
-    font-size: 3rem;
-    font-style: bold;
-    cursor: pointer;
-    height: 10%;
-  }
-  
-  .modal-close:hover {
-      color: grey;
-      cursor: pointer;
-  }
+  background-color: var(--modal-background-color);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .cardModal{
-    background-color: var(--card-background-color)
-  }
+.modal-close {
+  font-size: 3rem;
+  font-style: bold;
+  cursor: pointer;
+  height: 10%;
+}
+
+.modal-close:hover {
+  color: grey;
+  cursor: pointer;
+}
+
+.cardModal {
+  background-color: var(--card-background-color);
+}

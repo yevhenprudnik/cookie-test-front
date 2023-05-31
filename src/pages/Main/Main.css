@@ -1,87 +1,129 @@
 .center {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 .cardComponent {
-	background-color: var(--card-background-color);
-	width: 60%;
-    border: solid 2px var(--border-color);
-    box-shadow: 0px 0px 15px 3px var(--card-shadow-color);
+  background-color: var(--card-background-color);
+  width: 60%;
+  border: solid 2px var(--border-color);
+  box-shadow: 0px 0px 15px 3px var(--card-shadow-color);
 }
 
-.userNameStyle{
-    color: var(--user-color);
+.userNameStyle {
+  color: var(--user-color);
 }
-.grow1 { -moz-osx-font-smoothing: grayscale; -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-transform: translateZ( 0 ); transform: translateZ( 0 ); transition: -webkit-transform .25s ease-out; transition: transform .25s ease-out; transition: transform .25s ease-out, -webkit-transform .25s ease-out; }
-.grow1:hover{ -webkit-transform: scale( 1.05 ); transform: scale( 1.05 ); }
-.grow1-large { -moz-osx-font-smoothing: grayscale; -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-transform: translateZ( 0 ); transform: translateZ( 0 ); transition: -webkit-transform .25s ease-in-out; transition: transform .25s ease-in-out; transition: transform .25s ease-in-out, -webkit-transform .25s ease-in-out; }
-.grow1-large:hover{ -webkit-transform: scale( 1.2 ); transform: scale( 1.2 ); }
-.grow1-large:active { -webkit-transform: scale( .95 ); transform: scale( .95 ); }
+.grow1 {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: -webkit-transform 0.25s ease-out;
+  transition: transform 0.25s ease-out;
+  transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+}
+.grow1:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+.grow1-large {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  transition: -webkit-transform 0.25s ease-in-out;
+  transition: transform 0.25s ease-in-out;
+  transition: transform 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
+}
+.grow1-large:hover {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+}
+.grow1-large:active {
+  -webkit-transform: scale(0.95);
+  transform: scale(0.95);
+}
 /* Add pointer on hover */
-.pointer:hover { cursor: pointer}
+.pointer:hover {
+  cursor: pointer;
+}
 
 .container1 {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 .date {
-    width: 50%;
-    font-size: 1.3vw;
+  width: 50%;
+  font-size: 1.3vw;
 }
 .username {
-    font-size: 3vw;
-    padding-bottom: 1vw;
+  font-size: 3vw;
+  padding-bottom: 1vw;
 }
 .contentText {
-    font-size: 1.3vw;
-    padding-bottom: 1vw;
+  font-size: 1.3vw;
+  padding-bottom: 1vw;
 }
 .addButtonDiv {
-    padding: 40px;
-    position: fixed;
-    background-image: var(--add-post-icon);
-    background-repeat: no-repeat;
-    background-size: 70px;
-    right: 10px;
-    bottom: 10px;
+  padding: 40px;
+  position: fixed;
+  background-image: var(--add-post-icon);
+  background-repeat: no-repeat;
+  background-size: 70px;
+  right: 10px;
+  bottom: 10px;
 }
-.likeImg{
-    width: 3vw;
+.likeImg {
+  width: 3vw;
 }
-.commentImg{
-    width: 3vw;
+.commentImg {
+  width: 3vw;
 }
 .likes {
-    font-size: 2.5vw;
+  font-size: 2.5vw;
 }
 .likesDiv {
-    padding-top: 2%;
+  padding-top: 2%;
 }
 .PostUserImg {
-    width: 3vw;
-    border-radius: 100%;
-    border: solid 2px var(--border-color);
-    /* box-shadow: 0px 0px 10px 0px var(--card-shadow-color); */
+  width: 3vw;
+  border-radius: 100%;
+  border: solid 2px var(--border-color);
+  /* box-shadow: 0px 0px 10px 0px var(--card-shadow-color); */
 }
 .MyContainer {
-    display: flex;
+  display: flex;
 }
 
 .PostUserImgDiv {
-    padding-top: 0.8%;
-    padding-right: 1%;
+  padding-top: 0.8%;
+  padding-right: 1%;
 }
 .border {
-    border: solid 3px var(--border-color);
+  border: solid 3px var(--border-color);
 }
 
 .confirmEmail {
-    background-color: red;
+  background-color: red;
 }
-.confirmEmailDiv{
-    justify-content: center;
+.confirmEmailDiv {
+  justify-content: center;
 }
-.editImg{
-    width: 5%;
-    height: 5%;
+.editImg {
+  width: 5%;
+  height: 5%;
+}
+
+.test_img_div {
+  width: 200px; /* Set the desired width of the square container */
+  height: 200px; /* Set the desired height of the square container */
+  border-radius: 50%; /* Create a round shape by setting the border-radius to 50% */
+  overflow: hidden;
+}
+
+.test_img {
+    width: 100%; /* Make the image fill the container */
+    height: auto; /* Automatically adjust the height while maintaining the aspect ratio */
+    object-fit: cover;
 }

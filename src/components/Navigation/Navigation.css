@@ -1,8 +1,8 @@
 .navLinks {
-    text-decoration: none;
-    color: var(--button-color);
+  text-decoration: none;
+  color: var(--button-color);
 }
 .nawDiv {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }

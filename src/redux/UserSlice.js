@@ -1,10 +1,10 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { api, baseUrl } from "../api/api"; 
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { api, baseUrl } from '../api/api';
 
 const initialUser = {
   userId: 0,
-  authorized: false,
-  username: '',
+  authorized: true,
+  username: 'SAnya',
   email: '',
   posts: [],
   followers: [],
@@ -12,8 +12,8 @@ const initialUser = {
   memberSince: '',
   profileImage: '',
   userToFind: '',
-  isActivated: false
-}
+  isActivated: false,
+};
 
 // const DevUser = {
 //   userId: 1,
@@ -21,190 +21,195 @@ const initialUser = {
 //   username: 'Anthony',
 //   email: 'anthony@gmail.com',
 //   posts: [],
-//   friends: [], 
+//   friends: [],
 //   memberSince: new Date().toDateString(),
 //   profileImage: 'http://tachyons.io/img/avatar_1.jpg'
 // }
 
-export const getAuth = createAsyncThunk(
+export const logGebrish = createAsyncThunk(
   'UserSlice/getAuth',
-  async function(_, {rejectWithValue}){
-    try {
-      const response = await api.get(`${baseUrl}/auth`);
-      if (response.statusText !== 'OK') {
-        throw new Error();
-      }
-      return response.data
-    } catch (error) {
-      return rejectWithValue(error.message)
-    }
+  async function (_, { rejectWithValue }) {
+    console.log('!@#_________$%');
   }
-)
+);
 
 export const updNameAndImg = createAsyncThunk(
   'UserSlice/updNameAndImg',
-  async function(updateData, {rejectWithValue}){
+  async function (updateData, { rejectWithValue }) {
     try {
-      const response = await api.post(`${baseUrl}/updNameAndImg`, updateData)
+      const response = await api.post(`${baseUrl}/updNameAndImg`, updateData);
       if (response.statusText !== 'OK') {
         throw new Error();
       }
-      return response.data
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.message)
+      return rejectWithValue(error.message);
     }
   }
-)
+);
 
-export const follow  = createAsyncThunk(
+export const follow = createAsyncThunk(
   'UserSlice/follow',
-  async function(userToFollow, {rejectWithValue}){
+  async function (userToFollow, { rejectWithValue }) {
     try {
-      const response = await api.post(`${baseUrl}/follow`, userToFollow)
+      const response = await api.post(`${baseUrl}/follow`, userToFollow);
       if (response.statusText !== 'OK') {
         throw new Error();
       }
-      console.log(response.data)
-      return response.data
+      console.log(response.data);
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.message)
+      return rejectWithValue(error.message);
     }
   }
-)
+);
 
-export const unfollow  = createAsyncThunk(
+export const unfollow = createAsyncThunk(
   'UserSlice/follow',
-  async function(userToUnfollow, {rejectWithValue}){
+  async function (userToUnfollow, { rejectWithValue }) {
     try {
-      const response = await api.post(`${baseUrl}/unfollow`, userToUnfollow)
+      const response = await api.post(`${baseUrl}/unfollow`, userToUnfollow);
       if (response.statusText !== 'OK') {
         throw new Error();
       }
-      console.log(response.data)
-      return response.data
+      console.log(response.data);
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.message)
+      return rejectWithValue(error.message);
     }
   }
-)
+);
 
 const UserSlice = createSlice({
   name: 'UserSlice',
-  initialState: initialUser, 
+  initialState: initialUser,
   reducers: {
-    signOut(state){
-      localStorage.removeItem('accessToken')
-      localStorage.removeItem('refreshToken')
-      return initialUser
+    signOut(state) {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      return initialUser;
     },
-    loadUser(state, action){
-      const {username, email, id, profileImage, isActivated} = action.payload.user
-      const { accessToken, refreshToken} = action.payload
-      localStorage.setItem('accessToken',accessToken)
-      localStorage.setItem('refreshToken',refreshToken)
-      localStorage.setItem('userToFind', id)
-      state.username = username
-      state.email = email
-      state.userId = id
-      state.profileImage = profileImage
-      state.authorized = true
-      state.userToFind = id
-      state.isActivated = isActivated
+    loadUser(state, action) {
+      const { username, email, id, profileImage, isActivated } =
+        action.payload.user;
+      const { accessToken, refreshToken } = action.payload;
+
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      localStorage.setItem('userToFind', id);
+
+      state.username = username;
+      state.email = email;
+      state.userId = id;
+      state.profileImage = profileImage;
+      state.authorized = true;
+      state.userToFind = id;
+      state.isActivated = isActivated;
     },
-    changeUsername(state, action){
-      state.username = action.payload
+    changeUsername(state, action) {
+      state.username = action.payload;
     },
-    changeImage(state, action){
-      state.profileImage = action.payload
+    changeImage(state, action) {
+      state.profileImage = action.payload;
     },
-    selectUserToFind(state, action){
-      state.userToFind = action.payload
-    }
+    selectUserToFind(state, action) {
+      state.userToFind = action.payload;
+    },
   },
   extraReducers: {
     // -------------------------------- Auth --------------------------- //
-    [getAuth.pending]: (state) => {
-      state.status = 'pending'
-      state.error = null
+    [logGebrish.pending]: state => {
+      state.status = 'pending';
+      state.error = null;
     },
-    [ getAuth.fulfilled ]: (state, action) => {
+    [logGebrish.fulfilled]: (state, action) => {
       const {
-        username, email, _id, isActivated, 
-        profileImage, memberSince, followers, 
-        following 
-        } = action.payload
-      state.status = 'fulfilled'
-      state.error = null
-      state.username = username
-      state.email = email
-      state.userId = _id
-      state.authorized = true
-      state.profileImage = profileImage
-      state.userToFind = _id
-      state.memberSince = memberSince
-      state.isActivated = isActivated
-      state.followers = followers
-      state.following = following
-      localStorage.setItem('userToFind', _id)
+        username,
+        email,
+        _id,
+        isActivated,
+        profileImage,
+        memberSince,
+        followers,
+        following,
+      } = action.payload;
+      state.status = 'fulfilled';
+      state.error = null;
+      state.username = username;
+      state.email = email;
+      state.userId = _id;
+      state.authorized = true;
+      state.profileImage = profileImage;
+      state.userToFind = _id;
+      state.memberSince = memberSince;
+      state.isActivated = isActivated;
+      state.followers = followers;
+      state.following = following;
+      localStorage.setItem('userToFind', _id);
     },
-    [ getAuth.rejected ]: (state, action) => {
-      state.status = 'rejected'
-      state.error = action.payload
+    [logGebrish.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.error = action.payload;
     },
     // -------------------- Change username and Img ------------------ //
-    [updNameAndImg.pending]: (state) => {
-      state.status = 'pending'
-      state.error = null
+    [updNameAndImg.pending]: state => {
+      state.status = 'pending';
+      state.error = null;
     },
-    [ updNameAndImg.fulfilled ]: (state, action) => {
-      const { username, profileImage } = action.payload.user
-      const { accessToken, refreshToken } = action.payload
-      localStorage.setItem('accessToken',accessToken)
-      localStorage.setItem('refreshToken',refreshToken)
-      state.status = 'fulfilled'
-      state.error = null
-      state.username = username
-      state.profileImage = profileImage
+    [updNameAndImg.fulfilled]: (state, action) => {
+      const { username, profileImage } = action.payload.user;
+      const { accessToken, refreshToken } = action.payload;
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      state.status = 'fulfilled';
+      state.error = null;
+      state.username = username;
+      state.profileImage = profileImage;
     },
-    [ updNameAndImg.rejected ]: (state, action) => {
-      state.status = 'rejected'
-      state.error = action.payload
+    [updNameAndImg.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.error = action.payload;
     },
     // -------------------------------- Follow / Unfollow ------------------------------- //
-    [follow.pending]: (state) => {
-      state.status = 'pending'
-      state.error = null
+    [follow.pending]: state => {
+      state.status = 'pending';
+      state.error = null;
     },
-    [ follow.fulfilled ]: (state, action) => {
-      const { followers, following } = action.payload
-      state.status = 'fulfilled'
-      state.error = null
-      state.followers = followers
-      state.following = following
+    [follow.fulfilled]: (state, action) => {
+      const { followers, following } = action.payload;
+      state.status = 'fulfilled';
+      state.error = null;
+      state.followers = followers;
+      state.following = following;
     },
-    [ follow.rejected ]: (state, action) => {
-      state.status = 'rejected'
-      state.error = action.payload
+    [follow.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.error = action.payload;
     },
-    [unfollow.pending]: (state) => {
-      state.status = 'pending'
-      state.error = null
+    [unfollow.pending]: state => {
+      state.status = 'pending';
+      state.error = null;
     },
-    [ unfollow.fulfilled ]: (state, action) => {
-      const { followers, following } = action.payload
-      state.status = 'fulfilled'
-      state.error = null
-      state.followers = followers
-      state.following = following
+    [unfollow.fulfilled]: (state, action) => {
+      const { followers, following } = action.payload;
+      state.status = 'fulfilled';
+      state.error = null;
+      state.followers = followers;
+      state.following = following;
     },
-    [ unfollow.rejected ]: (state, action) => {
-      state.status = 'rejected'
-      state.error = action.payload
-    }
-  }
-})
+    [unfollow.rejected]: (state, action) => {
+      state.status = 'rejected';
+      state.error = action.payload;
+    },
+  },
+});
 
-export default UserSlice.reducer
+export default UserSlice.reducer;
 
-
-export const { selectUserToFind, signOut, changeUsername, changeImage, loadUser } = UserSlice.actions
+export const {
+  selectUserToFind,
+  signOut,
+  changeUsername,
+  changeImage,
+  loadUser,
+} = UserSlice.actions;

@@ -2,13 +2,15 @@ import {React, useState} from 'react'
 import Swal from 'sweetalert2'
 import { Link, Navigate } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { loadUser } from '../../redux/UserSlice'
+import { loadUser, logGebrish } from '../../redux/UserSlice'
 import './SignIn.css'
 import { api, baseUrl } from '../../api/api'
 import Loader from '../../components/Modals/Loader/Loader';
 import LoaderModal from '../../components/Modals/Loader/LoaderModal';
 
-const SignIn = ({ loadUser }) => {
+const SignIn = ({ loadUser, otherLoger }) => {
+  otherLoger()
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
@@ -106,7 +108,8 @@ const SignIn = ({ loadUser }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return { 
-    loadUser: (data) => dispatch(loadUser(data))
+    loadUser: (data) => dispatch(loadUser(data)),
+    otherLoger: () => dispatch(logGebrish())
   }
 }
 
